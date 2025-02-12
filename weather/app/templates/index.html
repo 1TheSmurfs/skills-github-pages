@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    
+    <!-- HTMX for dynamic updates -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Plotly for visualizations -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-800">Weather Dashboard</h1>
+            <p class="text-gray-600">Real-time weather information and forecasts</p>
+        </header>
+
+        <!-- Search Section -->
+        <div class="mb-8">
+            <form class="flex gap-2" hx-get="/api/weather/search" hx-trigger="submit" hx-target="#weather-data">
+                <input 
+                    type="text" 
+                    name="location" 
+                    placeholder="Enter city name..."
+                    class="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    required
+                >
+                <button 
+                    type="submit"
+                    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                >
+                    Search
+                </button>
+            </form>
+        </div>
+
+        <!-- Weather Data Section -->
+        <div id="weather-data" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Current Weather Card -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-4">Current Weather</h2>
+                <div id="current-weather">
+                    <p class="text-gray-600">Search for a location to see weather data</p>
+                </div>
+            </div>
+
+            <!-- Forecast Card -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-4">5-Day Forecast</h2>
+                <div id="forecast">
+                    <p class="text-gray-600">Search for a location to see forecast data</p>
+                </div>
+            </div>
+
+            <!-- Weather Chart Card -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold mb-4">Temperature Trend</h2>
+                <div id="weather-chart">
+                    <p class="text-gray-600">Search for a location to see temperature trends</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-12 py-6 bg-gray-800 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Weather Dashboard. Powered by OpenWeatherMap API.</p>
+        </div>
+    </footer>
+</body>
+</html> 

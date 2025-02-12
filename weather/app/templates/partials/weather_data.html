@@ -1,0 +1,46 @@
+<!-- Current Weather Card -->
+<div class="bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold mb-4">Current Weather in {{ location }}</h2>
+    <div class="flex items-center mb-4">
+        <img src="http://openweathermap.org/img/wn/{{ current.icon }}@2x.png" 
+             alt="{{ current.description }}"
+             class="w-16 h-16">
+        <div class="ml-4">
+            <p class="text-3xl font-bold">{{ "%.1f"|format(current.temperature) }}°C</p>
+            <p class="text-gray-600">Feels like {{ "%.1f"|format(current.feels_like) }}°C</p>
+        </div>
+    </div>
+    <div class="text-gray-700">
+        <p class="capitalize">{{ current.description }}</p>
+        <p>Humidity: {{ current.humidity }}%</p>
+    </div>
+</div>
+
+<!-- Forecast Card -->
+<div class="bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold mb-4">5-Day Forecast</h2>
+    <div class="space-y-4">
+        {% for day in forecast %}
+        <div class="flex items-center justify-between border-b pb-2 last:border-b-0">
+            <div class="flex items-center">
+                <img src="http://openweathermap.org/img/wn/{{ day.icon }}.png" 
+                     alt="{{ day.description }}"
+                     class="w-10 h-10">
+                <div class="ml-2">
+                    <p class="font-medium">{{ day.date }}</p>
+                    <p class="text-sm text-gray-600 capitalize">{{ day.description }}</p>
+                </div>
+            </div>
+            <p class="text-lg font-semibold">{{ "%.1f"|format(day.temperature) }}°C</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Weather Chart Card -->
+<div class="bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold mb-4">Temperature Trend</h2>
+    <div id="weather-chart">
+        {{ chart_html | safe }}
+    </div>
+</div> 
